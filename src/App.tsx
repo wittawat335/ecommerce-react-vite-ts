@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import { useReducer, useState } from "react";
 import Header from "@/components/Header";
 import ContactForm from "@/components/ContactForm";
 
+import { contactsReducer, State, Contact } from "./reducer/contactsReducer";
+
+const intialState: State = {
+  contacts: [],
+};
+
 function App() {
-  const [count, setCount] = useState(0);
+  const [state, dispatch] = useReducer(contactsReducer, intialState);
   return (
     <div className="container mt-4">
       <Header></Header>
-      <ContactForm></ContactForm>
+      <ContactForm dispatch={dispatch}></ContactForm>
     </div>
   );
 }

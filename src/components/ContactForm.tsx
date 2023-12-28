@@ -1,5 +1,11 @@
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { Action, Contact } from "reducer/contactsReducer";
+
+interface ContactFormProps {
+  dispatch: React.Dispatch<Action>;
+  dataToEdit: Contact | undefined;
+}
 
 const ContactForm: FC = () => {
   const [contact, setContact] = useState({
@@ -7,8 +13,6 @@ const ContactForm: FC = () => {
     lastName: "",
     phone: "",
   });
-
-  console.log(contact.firstName);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
