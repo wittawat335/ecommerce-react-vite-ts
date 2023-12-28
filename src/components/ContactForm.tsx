@@ -1,13 +1,12 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Action, Contact } from "reducer/contactsReducer";
+import { Action, Contact } from "@/reducer/contactsReducer";
 
 interface ContactFormProps {
   dispatch: React.Dispatch<Action>;
-  dataToEdit: Contact | undefined;
 }
 
-const ContactForm: FC = () => {
+const ContactForm: FC<ContactFormProps> = ({ dispatch }) => {
   const [contact, setContact] = useState({
     firstName: "",
     lastName: "",
@@ -27,6 +26,13 @@ const ContactForm: FC = () => {
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(contact);
+    dispatch({
+      type: "ADD_CONTACT",
+      payload: {
+        id: Date.now(),
+        ...contact,
+      },
+    });
   };
 
   return (

@@ -19,7 +19,8 @@
       "@/*": ["./src/*"],
       "@/components/*":["components/*"],
       "@/pages/*":["pages/*"],
-      "@/utilities/*":["utilities/*"]
+      "@/utilities/*":["utilities/*"],
+      "@/reducer/*":["reducer/*"]
     },
 
     /* Linting */

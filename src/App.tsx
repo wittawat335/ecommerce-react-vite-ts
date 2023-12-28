@@ -1,8 +1,8 @@
 import { useReducer, useState } from "react";
 import Header from "@/components/Header";
-import ContactForm from "@/components/ContactForm";
 
-import { contactsReducer, State, Contact } from "./reducer/contactsReducer";
+import { contactsReducer, State, Contact } from "@/reducer/contactsReducer";
+import ContactForm from "@/components/ContactForm";
 
 const intialState: State = {
   contacts: [],
@@ -10,6 +10,8 @@ const intialState: State = {
 
 function App() {
   const [state, dispatch] = useReducer(contactsReducer, intialState);
+
+  console.log("state", state);
   return (
     <div className="container mt-4">
       <Header></Header>
