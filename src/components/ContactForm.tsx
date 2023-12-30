@@ -4,13 +4,19 @@ import { Action, Contact } from "@/reducer/contactsReducer";
 
 interface ContactFormProps {
   dispatch: React.Dispatch<Action>;
+  dataToEdit: Contact | undefined;
+  toggleModal: () => void;
 }
 
-const ContactForm: FC<ContactFormProps> = ({ dispatch }) => {
+const ContactForm: FC<ContactFormProps> = ({
+  dispatch,
+  dataToEdit,
+  toggleModal,
+}) => {
   const [contact, setContact] = useState({
-    firstName: "",
-    lastName: "",
-    phone: "",
+    firstName: dataToEdit?.firstName ? dataToEdit.firstName : "",
+    lastName: dataToEdit?.lastName ? dataToEdit.lastName : "",
+    phone: dataToEdit?.phone ? dataToEdit.phone : "",
   });
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
