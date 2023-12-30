@@ -1,6 +1,8 @@
 import { FC } from "react";
-import { Contact } from "@/reducer/contactsReducer";
 import Table from "react-bootstrap/Table";
+
+import { Contact } from "@/reducer/contactsReducer";
+import ContactItem from "./ContactItem";
 
 type ContactListProps = {
   contacts: Contact[];
@@ -18,16 +20,13 @@ const ContactList: FC<ContactListProps> = ({ contacts }) => {
               <th>First Name</th>
               <th>Last Name</th>
               <th>Phone</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {contacts.map(({ id, firstName, lastName, phone }) => (
-              <tr key={id}>
-                <td>{id}</td>
-                <td>{firstName}</td>
-                <td>{lastName}</td>
-                <td>{phone}</td>
-              </tr>
+            {contacts.map((props) => (
+              <ContactItem key={props.id} {...props} />
             ))}
           </tbody>
         </Table>

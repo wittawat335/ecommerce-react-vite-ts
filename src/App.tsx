@@ -12,7 +12,7 @@ const intialState: State = {
 function App() {
   const [state, dispatch] = useReducer(contactsReducer, intialState);
 
-  console.log("state", state);
+  //console.log("state", state);
   return (
     <div className="container mt-4">
       <Header />
