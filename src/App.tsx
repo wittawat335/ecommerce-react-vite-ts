@@ -1,10 +1,12 @@
-import { useReducer, useState, useEffect } from "react";
 import Header from "@/components/Header";
-
-import { contactsReducer, State, Contact } from "@/reducer/contactsReducer";
 import ContactForm from "@/components/ContactForm";
 import ContactList from "@/components/ContactList";
-import ModalDialog from "./components/ModalDialog";
+import ModalDialog from "@/components/ModalDialog";
+import { Navbar } from "@/components/Navbar";
+
+import { contactsReducer, State, Contact } from "@/reducer/contactsReducer";
+import { useReducer, useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 
 const intialState: State = {
   contacts: [],
@@ -32,7 +34,8 @@ function App() {
 
   //console.log("state", state);
   return (
-    <div className="container mt-4">
+    <div className="container mb-4">
+      <Navbar></Navbar>
       <Header />
       <ContactForm
         dispatch={dispatch}
