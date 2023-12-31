@@ -30,10 +30,14 @@ const ContactItem: FC<Contact & ExtraProps> = ({
           className="icon"
           onClick={() => {
             const comfirmDelete = window.confirm(
-              `Are you sure you want to delete contact for user ${firstName} ${lastName}?`)
-              if(comfirmDelete){
-                
-              }
+              `Are you sure you want to delete contact for user ${firstName} ${lastName}?`
+            );
+            if (comfirmDelete) {
+              dispatch({
+                type: "DELETE",
+                payload: { id },
+              });
+            }
           }}
         />
       </td>

@@ -19,6 +19,8 @@ const ContactForm: FC<ContactFormProps> = ({
     phone: dataToEdit?.phone ? dataToEdit.phone : "",
   });
 
+  const [errorMsg, setErrorMsg] = useState("");
+
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setContact((prevState) => {
@@ -31,22 +33,52 @@ const ContactForm: FC<ContactFormProps> = ({
 
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(contact);
+
+    const { firstName, lastName, phone } = contact;
+
+    if (
+      firstName.trim() === "" ||
+      lastName.trim() === "" ||
+      phone.trim() === ""
+    ) {
+      setErrorMsg("All the fields are required.");
+      return;
+    } else if (!phone.trim().match(/^\d{10}$/g)) {
+      setErrorMsg("Please enter a valid 10 digit phone number.");
+      return;
+    }
+
     if (!dataToEdit) {
       dispatch({
-        type: "ADD_CONTACT",
+        type: "ADD",
         payload: {
           id: Date.now(),
           ...contact,
-        }
+        },
       });
-    } else{
+      setContact({
+        firstName: "",
+        lastName: "",
+        phone: "",
+      });
+    } else {
+      dispatch({
+        type: "UPDATE",
+        payload: {
+          id: dataToEdit.id,
+          updates: {
+            id: Date.now(),
+            ...contact,
+          },
+        },
+      });
       toggleModal();
     }
-  }
+  };
 
   return (
     <Form className="contact-form" onSubmit={handleOnSubmit}>
+      {errorMsg && <p className="alert alert-danger">{errorMsg}</p>}
       <Form.Group controlId="firstName">
         <Form.Label>First Name</Form.Label>
         <Form.Control
@@ -82,7 +114,7 @@ const ContactForm: FC<ContactFormProps> = ({
 
       <Form.Group controlId="submit" className="mt-4">
         <Button variant="primary" type="submit" className="submit">
-          {dataToEdit ? 'Update Contact' : 'Add Contact'}
+          {dataToEdit ? "Update Contact" : "Add Contact"}
         </Button>
       </Form.Group>
     </Form>
