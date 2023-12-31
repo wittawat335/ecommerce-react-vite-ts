@@ -32,14 +32,18 @@ const ContactForm: FC<ContactFormProps> = ({
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(contact);
-    dispatch({
-      type: "ADD_CONTACT",
-      payload: {
-        id: Date.now(),
-        ...contact,
-      },
-    });
-  };
+    if (!dataToEdit) {
+      dispatch({
+        type: "ADD_CONTACT",
+        payload: {
+          id: Date.now(),
+          ...contact,
+        }
+      });
+    } else{
+      toggleModal();
+    }
+  }
 
   return (
     <Form className="contact-form" onSubmit={handleOnSubmit}>
@@ -78,7 +82,7 @@ const ContactForm: FC<ContactFormProps> = ({
 
       <Form.Group controlId="submit" className="mt-4">
         <Button variant="primary" type="submit" className="submit">
-          Add Contact
+          {dataToEdit ? 'Update Contact' : 'Add Contact'}
         </Button>
       </Form.Group>
     </Form>

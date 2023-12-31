@@ -1,14 +1,16 @@
 import { FC } from "react";
 import Table from "react-bootstrap/Table";
 
-import { Contact } from "@/reducer/contactsReducer";
+import { Action, Contact } from "@/reducer/contactsReducer";
 import ContactItem from "./ContactItem";
 
 type ContactListProps = {
   contacts: Contact[];
+  handleEdit: (id: number) => void;
+  dispatch: React.Dispatch<Action>;
 };
 
-const ContactList: FC<ContactListProps> = ({ contacts }) => {
+const ContactList: FC<ContactListProps> = ({ contacts, handleEdit, dispatch }) => {
   return (
     <div className="contacts-list">
       <h3 className="contacts-list-title">List of Contacts</h3>
@@ -26,7 +28,7 @@ const ContactList: FC<ContactListProps> = ({ contacts }) => {
           </thead>
           <tbody>
             {contacts.map((props) => (
-              <ContactItem key={props.id} {...props} />
+              <ContactItem key={props.id} {...props} handleEdit={handleEdit} dispatch={dispatch}/>
             ))}
           </tbody>
         </Table>
