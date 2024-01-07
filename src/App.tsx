@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 
 import { contactsReducer, State, Contact } from "@/reducer/contactsReducer";
 import { useReducer, useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 
 const intialState: State = {

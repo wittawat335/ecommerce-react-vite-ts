@@ -5,7 +5,7 @@ type Props = {};
 const Header = (props: Props) => {
   return (
     <header>
-      <h1>ReactJS CRUD Application</h1>
+      <h1>React CRUD Application</h1>
     </header>
   );
 };
