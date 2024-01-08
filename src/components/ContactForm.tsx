@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Action, Contact } from "@/reducer/contactsReducer";
 
@@ -19,7 +19,7 @@ const ContactForm: FC<ContactFormProps> = ({
     phone: dataToEdit?.phone ? dataToEdit.phone : "",
   });
 
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState(""); //[ชื่อ state,ชื่อ function]
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -77,6 +77,10 @@ const ContactForm: FC<ContactFormProps> = ({
       toggleModal();
     }
   };
+
+  useEffect(() => {
+    console.log("call useEffect");
+  }, [contact.phone]);
 
   return (
     <Form className="contact-form" onSubmit={handleOnSubmit}>

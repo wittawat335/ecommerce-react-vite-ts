@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import Table from "react-bootstrap/Table";
 
 import { Action, Contact } from "@/reducer/contactsReducer";
 import ContactItem from "./ContactItem";
+import { DataContext } from "../context/DataContext";
 
 type ContactListProps = {
   contacts: Contact[];
@@ -15,6 +16,7 @@ const ContactList: FC<ContactListProps> = ({
   handleEdit,
   dispatch,
 }) => {
+  //const { contacts } = useContext(DataContext);
   return (
     <div className="contacts-list">
       <h3 className="contacts-list-title">List of Contacts</h3>

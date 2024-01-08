@@ -5,16 +5,18 @@ import ModalDialog from "@/components/ModalDialog";
 import { Navbar } from "@/components/Navbar";
 
 import { contactsReducer, State, Contact } from "@/reducer/contactsReducer";
-import { useReducer, useState, useEffect } from "react";
+import { useReducer, useState, useEffect, useContext } from "react";
 import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
+import { DataContext, DataContextProvider } from "./context/DataContext";
 
 const intialState: State = {
   contacts: [],
 };
 
 function App() {
-  const [state, dispatch] = useReducer(contactsReducer, intialState);
+  //[result ที่ return กลับมา,ส่วนของการเรียกใช้ action ที่อยู่ใน reducer]
+  const [state, dispatch] = useReducer(contactsReducer, intialState); //(ชื่อ reducer ที่จะเรียกใช้, state ที่เราจะส่งเข้าไปทำงาน)
   const [showModal, setShowModal] = useState(false);
   const [dataToEdit, setDataToEdit] = useState<Contact | undefined>(undefined);
 
@@ -33,31 +35,32 @@ function App() {
     toggleModal();
   };
 
-  //console.log("state", state);
   return (
-    <div className="container mb-4">
-      <Navbar></Navbar>
-      <Header />
-      <ContactForm
-        dispatch={dispatch}
-        dataToEdit={dataToEdit}
-        toggleModal={toggleModal}
-      />
-      <hr />
-      {state.contacts.length > 0 && (
-        <ContactList
-          contacts={state.contacts}
-          handleEdit={handleEdit}
+    <DataContextProvider>
+      <div className="container mb-4">
+        <Navbar></Navbar>
+        <Header />
+        <ContactForm
           dispatch={dispatch}
+          dataToEdit={dataToEdit}
+          toggleModal={toggleModal}
         />
-      )}
-      <ModalDialog
-        showModal={showModal}
-        dataToEdit={dataToEdit}
-        toggleModal={toggleModal}
-        dispatch={dispatch}
-      ></ModalDialog>
-    </div>
+        <hr />
+        {state.contacts.length > 0 && (
+          <ContactList
+            contacts={state.contacts}
+            handleEdit={handleEdit}
+            dispatch={dispatch}
+          />
+        )}
+        <ModalDialog
+          showModal={showModal}
+          dataToEdit={dataToEdit}
+          toggleModal={toggleModal}
+          dispatch={dispatch}
+        ></ModalDialog>
+      </div>
+    </DataContextProvider>
   );
 }
 
