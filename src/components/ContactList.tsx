@@ -10,7 +10,11 @@ type ContactListProps = {
   dispatch: React.Dispatch<Action>;
 };
 
-const ContactList: FC<ContactListProps> = ({ contacts, handleEdit, dispatch }) => {
+const ContactList: FC<ContactListProps> = ({
+  contacts,
+  handleEdit,
+  dispatch,
+}) => {
   return (
     <div className="contacts-list">
       <h3 className="contacts-list-title">List of Contacts</h3>
@@ -27,8 +31,13 @@ const ContactList: FC<ContactListProps> = ({ contacts, handleEdit, dispatch }) =
             </tr>
           </thead>
           <tbody>
-            {contacts.map((props) => (
-              <ContactItem key={props.id} {...props} handleEdit={handleEdit} dispatch={dispatch}/>
+            {contacts.map((item) => (
+              <ContactItem
+                key={item.id}
+                {...item}
+                handleEdit={handleEdit}
+                dispatch={dispatch}
+              />
             ))}
           </tbody>
         </Table>

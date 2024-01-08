@@ -23,9 +23,9 @@ const ContactForm: FC<ContactFormProps> = ({
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setContact((prevState) => {
+    setContact((prevItem) => {
       return {
-        ...prevState,
+        ...prevItem,
         [name]: value,
       };
     });
@@ -36,6 +36,7 @@ const ContactForm: FC<ContactFormProps> = ({
 
     const { firstName, lastName, phone } = contact;
 
+    // Validate
     if (
       firstName.trim() === "" ||
       lastName.trim() === "" ||
@@ -47,6 +48,7 @@ const ContactForm: FC<ContactFormProps> = ({
       setErrorMsg("Please enter a valid 10 digit phone number.");
       return;
     }
+    //////////////////////////////////////////////////////////////////////
 
     if (!dataToEdit) {
       dispatch({
